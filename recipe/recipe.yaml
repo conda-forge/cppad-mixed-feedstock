@@ -26,8 +26,8 @@ source:
   sha256: a5b8ddd1dc029b4e2f2a168599308c4c4f88b04b39f735709d8f6a986e13ec2e
 
 build:
-  # No ABI policy, let's be conservative
-  number: 0
+  # second build on this version
+  number: 1
 
 requirements:
   build:
