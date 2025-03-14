@@ -40,7 +40,10 @@ def system_command(command) :
 # Put this code in a function so as to not polute the file namespace
 def main() :
    #
-   print( 'run_test.py: Start' )
+   start_directory = os.getcwd().split('/')
+   print( 'run_test.py: start_directory   = ', start_directory )
+   if not os.path.isfile(example_file) :
+      sys.exit( f'run_test.py: cannot find example file = {example_file}' )
    #
    # system
    system = platform.system()
@@ -73,6 +76,10 @@ def main() :
    start            = example_file.rfind('/') + 1
    example_function = example_file[start : -4] + '_xam'
    #
+   # test_install
+   os.mkdir('test_install')
+   os.chdir('test_install')
+   #
    # main.cpp
    # Create C++ program that runs the example fucntion and check its result
    data = '''
@@ -102,7 +109,7 @@ project( check_install )
 # include_directories
 # link_directories
 find_package(PkgConfig)
-foreach(pkg gsl eigen3 ipopt cppad cppad_mixed)
+foreach(pkg gsl eigen3 ipopt cppad)
    pkg_check_modules( ${pkg} QUIET ${pkg} )
    if( ${pkg}_FOUND )
       message(STATUS "Found ${pkg}.pc file")
@@ -121,15 +128,15 @@ include_directories( SYSTEM PREFIX/include/suitesparse )
 #
 # check_main
 add_executable( main main.cpp EXAMPLE_FILE ) 
-target_link_libraries(main ${cppad_mixed_LIBRARIES} )
+target_link_libraries(main cppad_mixed )
 add_custom_target(check_main main)
 '''
-   data = data.replace( 'EXAMPLE_FILE',    example_file )
+   data = data.replace( 'EXAMPLE_FILE',    f'../{example_file}' )
    data = data.replace( 'PREFIX',          prefix )
    with open('CMakeLists.txt', 'w') as fobj :
       fobj.write(data)
    #
-   # build
+   # test_install/build
    os.mkdir('build')
    os.chdir('build')
    #
