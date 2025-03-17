@@ -40,7 +40,10 @@ def system_command(command) :
 # Put this code in a function so as to not polute the file namespace
 def main() :
    #
-   print( 'run_test.py: Start' )
+   start_directory = os.getcwd().split('/')
+   print( 'run_test.py: start_directory   = ', start_directory )
+   if not os.path.isfile(example_file) :
+      sys.exit( f'run_test.py: cannot find example file = {example_file}' )
    #
    # system
    system = platform.system()
@@ -73,6 +76,10 @@ def main() :
    start            = example_file.rfind('/') + 1
    example_function = example_file[start : -4] + '_xam'
    #
+   # test_install
+   os.mkdir('test_install')
+   os.chdir('test_install')
+   #
    # main.cpp
    # Create C++ program that runs the example fucntion and check its result
    data = '''
@@ -98,19 +105,20 @@ int main(void)
    data = '''
 cmake_minimum_required( VERSION 3.10 )
 project( check_install )
+message( STATUS CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME} )
+message( STATUS PKG_CONFIG_PATH   = $ENV{PKG_CONFIG_PATH} )
 #
 # include_directories
 # link_directories
 find_package(PkgConfig)
-foreach(pkg gsl eigen3 ipopt cppad cppad_mixed)
+foreach(pkg gsl eigen3 ipopt cppad)
    pkg_check_modules( ${pkg} QUIET ${pkg} )
    if( ${pkg}_FOUND )
       message(STATUS "Found ${pkg}.pc file")
    else( )
-      message(STATUS 
+      message(FATAL_ERROR 
          "Cannot find *.pc file for ${pkg} or a package it requires"
       )
-      message(FATAL_ERROR  "PKG_CONFIG_PATH=$ENV{PKG_CONFIG_PATH}")
    endif( )
    include_directories( SYSTEM ${${pkg}_INCLUDE_DIRS} )
    link_directories( ${${pkg}_LIBRARY_DIRS} )
@@ -118,18 +126,29 @@ endforeach( )
 #
 # Kludge: CHOLMOD.pc is missing on conda-forge windows install
 include_directories( SYSTEM PREFIX/include/suitesparse )
+set( CHOLMOD_LIBRARIES "cholmod;amd;camd;colamd;ccolamd;suitesparseconfig" )
+
 #
 # check_main
 add_executable( main main.cpp EXAMPLE_FILE ) 
-target_link_libraries(main ${cppad_mixed_LIBRARIES} )
+if( NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Windows" )
+   target_link_libraries(main cppad_mixed )
+else( )
+   # windwos is using static linkinging
+   target_link_libraries( main cppad_mixed
+      ${gsl_LIBRARIES}
+      ${ipopt_LIBRARIES}
+      ${CHOLMOD_LIBRARIES}
+   )
+endif( )
 add_custom_target(check_main main)
 '''
-   data = data.replace( 'EXAMPLE_FILE',    example_file )
+   data = data.replace( 'EXAMPLE_FILE',    f'../{example_file}' )
    data = data.replace( 'PREFIX',          prefix )
    with open('CMakeLists.txt', 'w') as fobj :
       fobj.write(data)
    #
-   # build
+   # test_install/build
    os.mkdir('build')
    os.chdir('build')
    #
