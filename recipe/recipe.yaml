@@ -27,7 +27,7 @@ source:
 
 build:
   # second build on this version
-  number: 1
+  number: 2
 
 requirements:
   build:
