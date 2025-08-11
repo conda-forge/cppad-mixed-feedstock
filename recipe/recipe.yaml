@@ -24,10 +24,12 @@ source:
   #
   url: https://github.com/bradbell/cppad_mixed/archive/${{ version }}.tar.gz
   sha256: a5b8ddd1dc029b4e2f2a168599308c4c4f88b04b39f735709d8f6a986e13ec2e
+  patches:
+    - 2025.0.2.patch
 
 build:
   # second build on this version
-  number: 1
+  number: 2
 
 requirements:
   build:
