@@ -12,7 +12,7 @@ schema_version: 1
 
 context:
   name: cppad-mixed
-  version: 2025.0.2
+  version: "2025.0.3"
 
 package:
   name: ${{ name }}
@@ -23,13 +23,13 @@ source:
   # sha256: 9cb39c79118dd67bc7c22f781aa7fbe9a6792b85d335929bad3ec92a016bf0b4
   #
   url: https://github.com/bradbell/cppad_mixed/archive/${{ version }}.tar.gz
-  sha256: a5b8ddd1dc029b4e2f2a168599308c4c4f88b04b39f735709d8f6a986e13ec2e
+  sha256: 36fbb604f3e0598d6ac8879d97fe0a3cc60e56847807d2a613a3c16f5ade5e72
   patches:
     - 2025.0.2.patch
 
 build:
   # second build on this version
-  number: 2
+  number: 0
 
 requirements:
   build:
