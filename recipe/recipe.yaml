@@ -19,16 +19,11 @@ package:
   version: ${{ version }}
 
 source:
-  # 2025.0.1
-  # sha256: 9cb39c79118dd67bc7c22f781aa7fbe9a6792b85d335929bad3ec92a016bf0b4
-  #
   url: https://github.com/bradbell/cppad_mixed/archive/${{ version }}.tar.gz
   sha256: 36fbb604f3e0598d6ac8879d97fe0a3cc60e56847807d2a613a3c16f5ade5e72
-  patches:
-    - 2025.0.2.patch
 
 build:
-  # second build on this version
+  # build number starts at zero for each new version
   number: 0
 
 requirements:
