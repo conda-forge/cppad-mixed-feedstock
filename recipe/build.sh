@@ -27,7 +27,8 @@ cmake ${CMAKE_ARGS} -S $SRC_DIR -B . \
 #
 # check
 # can't do make check during build becasue osx-arm64 is cross compiled
-# make -j$CPU_COUNT check
+# but the recipe.yaml is currently skipping osx-arm64
+make -j$CPU_COUNT check
 #
 # install
 make -j$CPU_COUNT install
