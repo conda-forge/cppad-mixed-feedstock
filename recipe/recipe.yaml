@@ -15,7 +15,7 @@ context:
   version: "2026.0.0"
 
 package:
-  name: ${{ name }}
+  name: cppad-mixed
   version: ${{ version }}
 
 source:

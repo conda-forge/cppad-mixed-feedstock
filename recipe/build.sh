@@ -3,7 +3,7 @@ set -e -u
 echo "build.sh: Start"
 #
 # extra_cxx_flags
-extra_cxx_flags='-Wpedantic -std=c++11 -Wall -Wshadow -Wconversion'
+extra_cxx_flags='-Wpedantic -std=c++17 -Wall -Wshadow -Wconversion'
 if [[ "${target_platform}" == osx-* ]]; then
    # https://conda-forge.org/docs/maintainer/knowledge_base.html#
    #  newer-c-features-with-old-sdk
