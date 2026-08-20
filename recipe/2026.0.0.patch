@@ -39,3 +39,63 @@ index c8843bd0..e8311c48 100644
  IF( cppad_mixed_has_nullptr_flag )
     SET(cppad_mixed_has_nullptr_01 1)
  ELSE( cppad_mixed_has_nullptr_flag )
+diff --git a/example/private/sparse_low2sym.cpp b/example/private/sparse_low2sym.cpp
+index 51d4c974..a2c6f0fc 100644
+--- a/example/private/sparse_low2sym.cpp
++++ b/example/private/sparse_low2sym.cpp
+@@ -21,6 +21,7 @@ This example is not part of the
+ {xrst_end sparse_low2sym.cpp}
+ */
+ // BEGIN C++
++# include <cassert>
+ # include <cmath>
+ # include <cstddef>
+ # include <limits>
+diff --git a/include/cppad/mixed/sparse_mat2low.hpp b/include/cppad/mixed/sparse_mat2low.hpp
+index adf0f2c1..12387b20 100644
+--- a/include/cppad/mixed/sparse_mat2low.hpp
++++ b/include/cppad/mixed/sparse_mat2low.hpp
+@@ -64,6 +64,7 @@ and test of ``sparse_mat2low`` .
+ 
+ {xrst_end sparse_mat2low}
+ */
++# include <cassert>
+ # include <Eigen/SparseCore>
+ 
+ namespace CppAD { namespace mixed {
+diff --git a/src/eigen/sparse_low_tri_sol.cpp b/src/eigen/sparse_low_tri_sol.cpp
+index 35de187f..4320a925 100644
+--- a/src/eigen/sparse_low_tri_sol.cpp
++++ b/src/eigen/sparse_low_tri_sol.cpp
+@@ -56,6 +56,7 @@ and test of ``sparse_low_tri_sol`` .
+ 
+ {xrst_end sparse_low_tri_sol}
+ */
++# include <cassert>
+ # include <cppad/mixed/sparse_low_tri_sol.hpp>
+ # include <iostream>
+ 
+diff --git a/src/eigen/sparse_up_tri_sol.cpp b/src/eigen/sparse_up_tri_sol.cpp
+index a456da6b..7f2778a9 100644
+--- a/src/eigen/sparse_up_tri_sol.cpp
++++ b/src/eigen/sparse_up_tri_sol.cpp
+@@ -56,6 +56,7 @@ and test of ``sparse_up_tri_sol`` .
+ 
+ {xrst_end sparse_up_tri_sol}
+ */
++# include <cassert>
+ # include <cppad/mixed/sparse_up_tri_sol.hpp>
+ # include <iostream>
+ 
+diff --git a/src/eigen/undetermined.cpp b/src/eigen/undetermined.cpp
+index 80cf477e..10e7e932 100644
+--- a/src/eigen/undetermined.cpp
++++ b/src/eigen/undetermined.cpp
+@@ -152,6 +152,7 @@ to convert this (and :ref:`sample_fixed-name` ) to all sparse matrices.
+ */
+ 
+ 
++# include <cassert>
+ # include <cmath>
+ # include <iostream>
+ # include <Eigen/Core>

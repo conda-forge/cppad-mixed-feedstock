@@ -15,7 +15,7 @@ context:
   version: "2026.0.0"
 
 package:
-  name: ${{ name }}
+  name: cppad-mixed
   version: ${{ version }}
 
 source:
@@ -27,7 +27,7 @@ source:
 
 build:
   # build number starts at zero for each new version
-  number: 3
+  number: 4
   skip:
     - osx and arm64
   script:
