@@ -11,8 +11,8 @@ cxx_compiler:
 gsl:
 - '2.8'
 ipopt:
-- 3.14.19
+- 3.14.20
 libcholmod:
-- '5'
+- '7'
 target_platform:
 - win-64
